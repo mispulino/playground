@@ -52,7 +52,7 @@ Cypress.Commands.add('createDefaultTodos', () => {
     })
 })
 
-Cypress.Commands.add('createTodo', function (todo) {
+Cypress.Commands.add('createTodo', (todo) => {
 
   let cmd = Cypress.log({
     name: 'create todo',
