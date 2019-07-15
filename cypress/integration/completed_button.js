@@ -29,7 +29,7 @@ describe('TodoMVC - playground', () => {
       cy.get('@todos').eq(1).should('contain', TODO_THREE)
     })
 
-    it('should be hidden when there are no items that are completed', () => {
+    it('Clear completed action is hidden when no items', () => {
       cy.get('@todos').eq(1).find('.toggle').check()
       cy.get('.clear-completed').should('be.visible').click()
       cy.get('.clear-completed').should('not.exist')
