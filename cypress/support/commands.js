@@ -34,22 +34,22 @@ Cypress.Commands.add('createDefaultTodos', () => {
   let cmd = Cypress.log({
     name: 'create default todos',
     message: [],
-    consoleProps () {
+    consoleProps() {
       return {
         'Inserted Todos': [TODO_ONE, TODO_TWO, TODO_THREE],
       }
     },
   })
 
-  cy.get('.new-todo', {log: false})
-  .type(`${TODO_ONE}{enter}`, {log: false})
-  .type(`${TODO_TWO}{enter}`, {log: false})
-  .type(`${TODO_THREE}{enter}`, {log: false})
+  cy.get('.new-todo', { log: false })
+    .type(`${TODO_ONE}{enter}`, { log: false })
+    .type(`${TODO_TWO}{enter}`, { log: false })
+    .type(`${TODO_THREE}{enter}`, { log: false })
 
-  cy.get('.todo-list li', {log: false})
-  .then(function ($listItems) {
-    cmd.set({ $el: $listItems }).snapshot().end()
-  })
+  cy.get('.todo-list li', { log: false })
+    .then(function ($listItems) {
+      cmd.set({ $el: $listItems }).snapshot().end()
+    })
 })
 
 Cypress.Commands.add('createTodo', function (todo) {
@@ -57,17 +57,17 @@ Cypress.Commands.add('createTodo', function (todo) {
   let cmd = Cypress.log({
     name: 'create todo',
     message: todo,
-    consoleProps () {
+    consoleProps() {
       return {
         'Inserted Todo': todo,
       }
     },
   })
 
-  cy.get('.new-todo', {log: false}).type(`${todo}{enter}`, {log: false})
-  cy.get('.todo-list', {log: false})
-  .contains('li', todo.trim(), {log: false})
-  .then(function ($li) {
-    cmd.set({ $el: $li }).snapshot().end()
-  })
+  cy.get('.new-todo', { log: false }).type(`${todo}{enter}`, { log: false })
+  cy.get('.todo-list', { log: false })
+    .contains('li', todo.trim(), { log: false })
+    .then(function ($li) {
+      cmd.set({ $el: $li }).snapshot().end()
+    })
 })
