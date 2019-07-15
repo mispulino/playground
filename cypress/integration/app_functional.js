@@ -7,7 +7,7 @@ describe('TodoMVC - playground', () => {
   let TODO_TWO = 'Take a dog for a walk'
   let TODO_THREE = 'Take a nap'
 
-  beforeEach( () => {
+  beforeEach(() => {
     cy.visit('/')
   })
 
@@ -56,9 +56,9 @@ describe('TodoMVC - playground', () => {
       // custom command 'createDefaultTodos'
       cy.createDefaultTodos().as('todos')
       cy.get('@todos').eq(1).as('secondTodo')
-      .find('label').dblclick()
+        .find('label').dblclick()
       cy.get('@secondTodo').find('.edit').clear()
-      .type('Clean the house').type('{enter}')
+        .type('Clean the house').type('{enter}')
       cy.get('@todos').eq(0).should('contain', TODO_ONE)
       cy.get('@secondTodo').should('contain', 'Clean the house')
       cy.get('@todos').eq(2).should('contain', TODO_THREE)
@@ -66,7 +66,7 @@ describe('TodoMVC - playground', () => {
 
     it('Delete all items', () => {
       cy.createDefaultTodos().as('todos')
-      cy.get('.todo-list li .destroy').invoke('show').click({multiple : true})
+      cy.get('.todo-list li .destroy').invoke('show').click({ multiple: true })
       cy.get('.todo-list li').should('not.exist')
     })
   })

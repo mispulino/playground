@@ -4,15 +4,15 @@
 describe('TodoMVC - playground', () => {
 
   let TODO_ONE = 'Wash dishes'
-  let TODO_TWO = 'Take a dog for a walk'
+  // let TODO_TWO = 'Take a dog for a walk'
   let TODO_THREE = 'Take a nap'
 
-  beforeEach( () => {
+  beforeEach(() => {
     cy.visit('/')
   })
 
   context('Clear completed button', () => {
-    beforeEach( () => {
+    beforeEach(() => {
       cy.createDefaultTodos().as('todos')
     })
 
