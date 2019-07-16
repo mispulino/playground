@@ -4,31 +4,38 @@
 describe('My first assingment', () => {
 
     let TODO_FIRST = 'Clean the house'
+    let TODO_ONE = 'Wash dishes'
+    let TODO_TWO = 'Take a dog for a walk'
+    let TODO_THREE = 'Take a nap'
 
     beforeEach(() => {
         cy.visit('/')
-      })
+    })
 
     context('Input is visible', () => {
         it('Check the input', () => {
             cy.get('.new-todo').should('be.visible')
-    })
+        })
 
     context('List can be created', () => {
         it('Write down first step and verify if list was created', () => {
             cy.createTodo(TODO_FIRST).should('be.visible')
-        })
-        it ('Verify if list was created', () => {
+            })
+        it('Verify if list was created', () => {
             cy.get('.todo-list').should('exist')
+            })
         })
-    })
 
     context('Write more steps and verify items', () => {
-        it('Write more steps', () => {
+        beforeEach(() => {
             cy.createDefaultTodos().as('todos')
+            })
+
+        it('Write steps', () => {
             cy.get('@todos').eq(0).should('contain', TODO_ONE)
-            cy.get('@todos').eq(0).should('contain', TODO_TWO)
+            cy.get('@todos').eq(1).should('contain', TODO_TWO)
             cy.get('@todos').eq(2).should('contain', TODO_THREE)
+            cy.get('@todos').should('have.length', 3)
             })
         })
     })
