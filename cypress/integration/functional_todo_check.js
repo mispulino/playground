@@ -37,25 +37,31 @@ describe('My first assingment', () => {
             cy.get('@todos').eq(2).should('contain', TODO_THREE)
             cy.get('@todos').should('have.length', 3)
             })
+
+        it ('All items should be active', () => {
+            cy.get('.selected').contains('All')
+        })
+        
+        it ('Complete one item from the list', () => {
+            cy.get('@todos').eq(1).find('.toggle').check()
+            cy.get('.clear-completed').click()
+            cy.get('@todos').should('have.length', 2)
+            cy.get('@todos').eq(0).should('contain', TODO_ONE)
+            cy.get('@todos').eq(1).should('contain', TODO_THREE)
+        })
+    })
+
+        it ('Delete one item from the list', () => {
+        })
+    })
+
+    context('Badumtss', () => {
+        it('Imagine the noise', () => {
+            cy.get('.new-todo').type('All done!')
+            cy.log('All done!')
         })
     })
 })
-//     // All items should be active
-
-//     it('All items should be active now', () => {
-//         cy.get('.selected').contains('All')
-//     })
-
-//     // Complete one item from the list and verify if it's deleted from items total
-//     it('Complete item', () => {
-//         cy.get(':nth-child(2) > .view > [data-cy=toggle]').click()
-//         cy.get('.todo-count').should(($span) => {
-//             const text = $span.text()
-//             expect(text).to.match(/3/)
-//         })
-//     })
-
-//     // Click on completed items and find just one thing there
 
 //     it('Verify completed items', () => {
 //         cy.contains('Completed').click()
@@ -88,12 +94,3 @@ describe('My first assingment', () => {
 // 		cy.get('input.toggle').click({multiple : true})
 // 		cy.get('.clear-completed').click()
 // 		})
-
-// 	// badumtss
-
-//     it('Badumtss', () => {
-//     	cy.get('.new-todo').type(`All done!`)
-//     	cy.log(`All done!`)
-//     })
-// })
-
