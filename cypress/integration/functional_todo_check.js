@@ -17,47 +17,54 @@ describe('My first assingment', () => {
             cy.get('.new-todo').should('be.visible')
         })
 
-    context('List can be created', () => {
-        it('Write down first step and verify if list was created', () => {
-            cy.createTodo(TODO_FIRST).should('be.visible')
+        context('List can be created', () => {
+            it('Write down first step and verify if list was created', () => {
+                cy.createTodo(TODO_FIRST).should('be.visible')
             })
-        it('Verify if list was created', () => {
-            cy.get('.todo-list').should('exist')
+            it('Verify if list was created', () => {
+                cy.get('.todo-list').should('exist')
             })
         })
 
-    context('Write more steps and verify items', () => {
-        beforeEach(() => {
-            cy.createDefaultTodos().as('todos')
+        context('Write more steps and verify items', () => {
+            beforeEach(() => {
+                cy.createDefaultTodos().as('todos')
             })
 
-        it('Write steps', () => {
-            cy.get('@todos').eq(0).should('contain', TODO_ONE)
-            cy.get('@todos').eq(1).should('contain', TODO_TWO)
-            cy.get('@todos').eq(2).should('contain', TODO_THREE)
-            cy.get('@todos').should('have.length', 3)
+            it('Write steps', () => {
+                cy.get('@todos').eq(0).should('contain', TODO_ONE)
+                cy.get('@todos').eq(1).should('contain', TODO_TWO)
+                cy.get('@todos').eq(2).should('contain', TODO_THREE)
+                cy.get('@todos').should('have.length', 3)
             })
 
-        it ('All items should be active', () => {
-            cy.get('.selected').contains('All')
-        })
-        
-        it ('Complete one item from the list', () => {
-            cy.get('@todos').eq(1).find('.toggle').check()
-            cy.get('.clear-completed').click()
-            cy.get('@todos').should('have.length', 2)
-            cy.get('@todos').eq(0).should('contain', TODO_ONE)
-            cy.get('@todos').eq(1).should('contain', TODO_THREE)
-        })
-    })
+            it('All items should be active', () => {
+                cy.get('.selected').contains('All')
+            })
 
-        it ('Delete one item from the list', () => {
+            it('Complete one item from the list', () => {
+                cy.get('@todos').eq(1).find('.toggle').check()
+                cy.get('.clear-completed').click()
+                cy.get('@todos').should('have.length', 2)
+                cy.get('@todos').eq(0).should('contain', TODO_ONE)
+                cy.get('@todos').eq(1).should('contain', TODO_THREE)
+            })
+
+            it('Trim text input', function () {
+                cy.createTodo(`                        ${TODO_ONE}    `)
+                cy.get('.todo-count').contains('4 items left')
+            })
+
+            it('Delete one item from the list', () => {
+                cy.get('@todos').eq(1).find('.destroy').invoke('show').click()
+                cy.get('@todos').should('have.length', 2)
+            })
         })
     })
 
     context('Badumtss', () => {
         it('Imagine the noise', () => {
-            cy.get('.new-todo').type('All done!')
+            cy.get('.new-todo').type('Badumtss!')
             cy.log('All done!')
         })
     })
@@ -67,27 +74,14 @@ describe('My first assingment', () => {
 //         cy.contains('Completed').click()
 //         cy.get('.todo-count strong').should('have.length', 1)
 //     })
-
-//     // Clear all completed
-
-//     it('Clear all completed', () => {
-//     	cy.get('.clear-completed').click()
-//     })
-
+//
 //     // Click on active items and find two jobs there
 
 //     it('Verify active items', () => {
 //         cy.get(':nth-child(2) > a').click()
 //         cy.get('#root > div > section > ul').find('li').should('have.length', 3)
 //     })
-
-//     // Delete one item from the list
-
-//     it('Delete one item from the list', () => {
-//         cy.get(':nth-child(2) > .view > [data-cy=todo-item-remove]').invoke('show').click()
-//         cy.get('#root > div > section > ul').find('li').should('have.length', 2)
-//     })
-
+//
 //     // Clear all
 //     it('Clear all', () => {
 // 		cy.get(':nth-child(1) > a').click()
