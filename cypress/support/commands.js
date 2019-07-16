@@ -71,3 +71,15 @@ Cypress.Commands.add('createTodo', (todo) => {
       cmd.set({ $el: $li }).snapshot().end()
     })
 })
+
+Cypress.Commands.add('MoreTodoVerify', () => {
+  cy.fixture('notes.json').then((notes) => {
+    notes.forEach((note, index) => {
+        cy.get('.new-todo').type(`${note}{enter}`)
+        cy.get(`:nth-child(${index + 2}) > .view > [data-cy=todo-item-label]`).should(($span) => {
+            const text = $span.text()
+            expect(text).to.match(new RegExp(note))
+          })
+        })
+      })
+    })
