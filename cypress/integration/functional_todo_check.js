@@ -1,4 +1,4 @@
-// Tester assingment for Productboard! From Misa (https://github.com/mispulino) in Cypress.io
+// Cypress playground from Misa (https://github.com/mispulino) in Cypress.io
 // Find "how to" in readme.md
 
 describe('My first assingment', () => {
