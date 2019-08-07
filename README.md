@@ -1,4 +1,4 @@
-# playground - Assigment for productboard vol. 2
+# playground
 
 Automated tests for the TO-DO application using [Cypress](https://docs.cypress.io)
 
